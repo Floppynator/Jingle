@@ -6,7 +6,6 @@ import sys
 import tty
 import pygame
 import RPi.GPIO as GPIO
-#import _rpi_ws281x as ws
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -29,17 +28,11 @@ GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 # coin
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-# LED
-# led = ws.new_ws2811_t()
-# GPIO.setup(12, GPIO.IN)
-# PIN 12/18
-
 def main():
 	pygame.init()
 	pygame.mixer.init()
 
 	running = True
-	inkey_buffer = 1
 
 	# Default Startpage is 0
 	page_selected = 0
@@ -49,32 +42,44 @@ def main():
 
 	NADINE_PATH = '/home/pi/Jingle/nadine'
 	ANDREAS_PATH = '/home/pi/Jingle/andreas'
+	RONNY_PATH = '/home/pi/Jingle/ronny'
 	SONSTIGE_PATH = '/home/pi/Jingle/sonstige'
 
 	# Add some Arrays here (MAX 8 entries)
 	nadine = [
-		NADINE_PATH + '/nb_wurstvitamine2_long.mp3', 
-		NADINE_PATH + '/nb_baehh.mp3', 
-		NADINE_PATH + '/nb_eckelhaft.mp3', 
-		NADINE_PATH + '/nb_haeee.mp3', 
+		NADINE_PATH + '/nb_wurstvitamine2_long.mp3',
+		NADINE_PATH + '/nb_baehh.mp3',
+		NADINE_PATH + '/nb_eckelhaft.mp3',
+		NADINE_PATH + '/nb_haeee.mp3',
 		NADINE_PATH + '/nb_bio_is_abfall.mp3',
 		NADINE_PATH + '/nb_beispiel.mp3',
 		NADINE_PATH + '/nb_dein_terrerium.mp3',
 		NADINE_PATH + '/nb_neee.mp3']
 	andreas = [
-		ANDREAS_PATH + '/pa_ausraster_schnauze.mp3', 
-		ANDREAS_PATH + '/pa_bleibt_so.mp3', 
-		ANDREAS_PATH + '/pa_bleibt_so2.mp3', 
-		ANDREAS_PATH + '/pa_brueller.mp3', 
-		ANDREAS_PATH + '/pa_jetzt_rede_ich.mp3', 
-		ANDREAS_PATH + '/pa_oberzicke.mp3', 
-		ANDREAS_PATH + '/pa_stopp1.mp3', 
+		ANDREAS_PATH + '/pa_ausraster_schnauze.mp3',
+		ANDREAS_PATH + '/pa_bleibt_so.mp3',
+		ANDREAS_PATH + '/pa_bleibt_so2.mp3',
+		ANDREAS_PATH + '/pa_brueller.mp3',
+		ANDREAS_PATH + '/pa_jetzt_rede_ich.mp3',
+		ANDREAS_PATH + '/pa_oberzicke.mp3',
+		ANDREAS_PATH + '/pa_stopp1.mp3',
 		ANDREAS_PATH + '/pa_stopp3_halt_stopp.mp3']
+	ronny = [
+		RONNY_PATH + '/keinelust.mp3',
+		RONNY_PATH + '/dasgehtsonicht.mp3',
+                RONNY_PATH + '/ende.mp3',
+                RONNY_PATH + '/jetztreichts.mp3',
+                RONNY_PATH + '/jungejunge.mp3',
+                RONNY_PATH + '/uebel.mp3',
+                RONNY_PATH + '/bingo.mp3',
+                RONNY_PATH + '/wild.mp3']
 	sonstige = [
 		SONSTIGE_PATH + '/xfiles.mp3',
 		SONSTIGE_PATH + '/xfactor.mp3',
 		SONSTIGE_PATH + '/mission.mp3']
-	page = [nadine, andreas, sonstige]
+
+	# Jingle Arrays
+	page = [nadine, andreas, ronny, sonstige]
 
 	# Play Jingle
 	def playJingle(source):
@@ -117,6 +122,10 @@ def main():
 
 		for entry in andreas:
 			# fill array with andreas crap
+			rndArray.append(entry)
+
+		for entry in ronny:
+			# fill array with ronny crap
 			rndArray.append(entry)
 
 		# no music in random button
