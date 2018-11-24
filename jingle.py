@@ -55,9 +55,12 @@ def main():
 	nadine = [
 		NADINE_PATH + '/nb_wurstvitamine2_long.mp3', 
 		NADINE_PATH + '/nb_baehh.mp3', 
-		NADINE_PATH+ '/nb_eckelhaft.mp3', 
+		NADINE_PATH + '/nb_eckelhaft.mp3', 
 		NADINE_PATH + '/nb_haeee.mp3', 
-		NADINE_PATH + '/nb_bio_is_abfall.mp3']
+		NADINE_PATH + '/nb_bio_is_abfall.mp3',
+		NADINE_PATH + '/nb_beispiel.mp3',
+		NADINE_PATH + '/nb_dein_terrerium.mp3',
+		NADINE_PATH + '/nb_neee.mp3']
 	andreas = [
 		ANDREAS_PATH + '/pa_ausraster_schnauze.mp3', 
 		ANDREAS_PATH + '/pa_bleibt_so.mp3', 
