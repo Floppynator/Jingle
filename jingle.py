@@ -45,11 +45,11 @@ def main():
 	page_selected = 0
 
 	# startup sound
-	startsound = '/home/pi/jingle/start.mp3'
+	startsound = '/home/pi/Jingle/start.mp3'
 
-	NADINE_PATH = '/home/pi/jingle/nadine'
-	ANDREAS_PATH = '/home/pi/jingle/andreas'
-	SONSTIGE_PATH = '/home/pi/jingle/sonstige'
+	NADINE_PATH = '/home/pi/Jingle/nadine'
+	ANDREAS_PATH = '/home/pi/Jingle/andreas'
+	SONSTIGE_PATH = '/home/pi/Jingle/sonstige'
 
 	# Add some Arrays here (MAX 8 entries)
 	nadine = [
