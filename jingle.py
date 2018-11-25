@@ -61,8 +61,17 @@ def main():
 		NADINE_PATH + '/nb_bio_is_abfall.mp3',
 		NADINE_PATH + '/nb_beispiel.mp3',
 		NADINE_PATH + '/nb_dein_terrerium.mp3',
-		NADINE_PATH + '/nb_neee.mp3',
-		'Nadine']
+		NADINE_PATH + '/nb_neee.mp3']
+	nadine_text = [
+		'Nadine!',
+		'Jawoll die Vitamine!',
+		'Baeehhhh',
+		'Eckelhaft!',
+		'Haeeeee??',
+		'Bio ist Abfall!',
+		'Zum Beispiel!',
+		'Dein Terrerium!',
+		'Neeeee']
 	andreas = [
 		ANDREAS_PATH + '/pa_ausraster_schnauze.mp3',
 		ANDREAS_PATH + '/pa_bleibt_so.mp3',
@@ -71,8 +80,17 @@ def main():
 		ANDREAS_PATH + '/pa_jetzt_rede_ich.mp3',
 		ANDREAS_PATH + '/pa_oberzicke.mp3',
 		ANDREAS_PATH + '/pa_stopp1.mp3',
-		ANDREAS_PATH + '/pa_stopp3_halt_stopp.mp3',
-		'Andreas']
+		ANDREAS_PATH + '/pa_stopp3_halt_stopp.mp3']
+	andreas_text = [
+		'Andreas!',
+		'Schnautze!',
+		'Bleibt so!',
+  		'Ob du hier bist und nicht!',
+		'Wuuuahhaee!',
+		'Jetzt rede ich!',
+		'Oberzicke!',
+		'Stop!',
+		'Halt STOP!']
 	ronny = [
 		RONNY_PATH + '/keinelust.mp3',
 		RONNY_PATH + '/dasgehtsonicht.mp3',
@@ -81,21 +99,40 @@ def main():
                 RONNY_PATH + '/jungejunge.mp3',
                 RONNY_PATH + '/uebel.mp3',
                 RONNY_PATH + '/bingo.mp3',
-                RONNY_PATH + '/wild.mp3',
-		'Ronny']
+                RONNY_PATH + '/wild.mp3']
+	ronny_text = [
+		'Ronny!',
+		'Keine Lust!',
+		'Das geht so nicht!',
+		'Ende!',
+		'Jetzt reichts!',
+		'Junge Junge',
+		'Uebel Uebel',
+		'BINGO!',
+		'Man bin ich wild']
 	sonstige = [
 		SONSTIGE_PATH + '/xfiles.mp3',
 		SONSTIGE_PATH + '/xfactor.mp3',
 		SONSTIGE_PATH + '/mission.mp3',
-                SONSTIGE_PATH + '/',
+                SONSTIGE_PATH + '/robert.mp3',
                 SONSTIGE_PATH + '/',
 		SONSTIGE_PATH + '/',
                 SONSTIGE_PATH + '/',
-                SONSTIGE_PATH + '/',
-		'Sonstige']
+                SONSTIGE_PATH + '/']
+	sonstige_text = [
+		'Sonstiges',
+		'X-Files',
+		'X-Factor',
+		'Mission Impossible',
+		'Roooobert!!!',
+		'',
+		'',
+		'',
+		'']
 
 	# Jingle Arrays
 	page = [nadine, andreas, ronny, sonstige]
+	page_text = [nadine_text, andreas_text, ronny_text, sonstige_text]
 
 	# Play Jingle
 	def playJingle(source):
@@ -154,94 +191,91 @@ def main():
 		pygame.mixer.music.play()
 
 
+	def displayText(text):
+		scrollphat.clear()
+		scrollphat.write_string(text)
+		for i in range(0, scrollphat.buffer_len() - 11):
+			scrollphat.scroll()
+			sleep(0.1)
+		scrollphat.clear()
+
 	# play startsound
 	pygame.mixer.music.load(startsound)
 	pygame.mixer.music.play()
 
+	(displayText(page_text[0][0]))
+
 	while running:
-		scrollphat.clear()
-		scrollphat.write_string(str(page[page_selected][8]))
 
 		if GPIO.input(5) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][0]))
-				scrollphat.clear()
-				scrollphat.write_string(page[page_selected][8])
+				(displayText(page_text[page_selected][1]))
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(11) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][1]))
-				scrollphat.clear()
-				scrollphat.write_string(page[page_selected][8])
+				(displayText(page_text[page_selected][2]))
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(8) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][2]))
-				scrollphat.clear()
-				scrollphat.write_String(page[page_selected][8])
+				(displayText(page_text[page_selected][3]))
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(25) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][3]))
-				scrollphat.write_string(page[page_selected][8])
-				scrollphat.clear()
+				(displayText(page_text[page_selected][4]))
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(9) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][4]))
-				scrollphat.write_string(page[page_selected][8])
-				scrollphat.clear()
+				(displayText(page_text[page_selected][5]))
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(10) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][5]))
-				scrollphat.write_string(page[page_selected][8])
-				scrollphat.clear()
+				(displayText(page_text[page_selected][6]))
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(20) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][6]))
-				scrollphat.write_string(page[page_selected][8])
-				scrollphat.clear()
+				(displayText(page_text[page_selected][7]))
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(6) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][7]))
-				scrollphat.write_string(page[page_selected][8])
-				scrollphat.clear()
+				(displayText(page_text[page_selected][8]))
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(27) == GPIO.LOW:
 			# page UP
 			page_selected = (pageUp(page_selected, len(page)))
-			scrollphat.clear()
-			scrollphat.write_string(page[page_selected][8])
+			(displayText(page_text[page_selected][0]))
 			sleep(1)
 		if GPIO.input(22) == GPIO.LOW:
 			# page DOWN
 			page_selected = (pageDown(page_selected, len(page)))
-			scrollphat.clear()
-			scrollphat.write_string(page[page_selected][8])
+			(displayText(page_text[page_selected][0]))
 			sleep(1)
 		if GPIO.input(23) == GPIO.LOW:
 			# All Random Fun Button
-			scrollphat.clear()
-                        scrollphat.write_string('Random!!')
+			(displayText('Random!!'))
 			(playRandom())
 			sleep(1)
 
