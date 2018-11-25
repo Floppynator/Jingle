@@ -6,11 +6,13 @@ import sys
 import tty
 import pygame
 import RPi.GPIO as GPIO
+import scrollphat
 
+# ser modes
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-# register pins fopr buttons
 
+# register pins fopr buttons
 # button 1-8
 GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(11, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -27,6 +29,11 @@ GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 # coin
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+# scrollphat init
+scrollphat.set_brightness(5)
+scrollphat.clear()
+scrollphat.scroll(1)
 
 def main():
 	pygame.init()
@@ -54,7 +61,8 @@ def main():
 		NADINE_PATH + '/nb_bio_is_abfall.mp3',
 		NADINE_PATH + '/nb_beispiel.mp3',
 		NADINE_PATH + '/nb_dein_terrerium.mp3',
-		NADINE_PATH + '/nb_neee.mp3']
+		NADINE_PATH + '/nb_neee.mp3',
+		'Nadine']
 	andreas = [
 		ANDREAS_PATH + '/pa_ausraster_schnauze.mp3',
 		ANDREAS_PATH + '/pa_bleibt_so.mp3',
@@ -63,7 +71,8 @@ def main():
 		ANDREAS_PATH + '/pa_jetzt_rede_ich.mp3',
 		ANDREAS_PATH + '/pa_oberzicke.mp3',
 		ANDREAS_PATH + '/pa_stopp1.mp3',
-		ANDREAS_PATH + '/pa_stopp3_halt_stopp.mp3']
+		ANDREAS_PATH + '/pa_stopp3_halt_stopp.mp3',
+		'Andreas']
 	ronny = [
 		RONNY_PATH + '/keinelust.mp3',
 		RONNY_PATH + '/dasgehtsonicht.mp3',
@@ -72,11 +81,18 @@ def main():
                 RONNY_PATH + '/jungejunge.mp3',
                 RONNY_PATH + '/uebel.mp3',
                 RONNY_PATH + '/bingo.mp3',
-                RONNY_PATH + '/wild.mp3']
+                RONNY_PATH + '/wild.mp3',
+		'Ronny']
 	sonstige = [
 		SONSTIGE_PATH + '/xfiles.mp3',
 		SONSTIGE_PATH + '/xfactor.mp3',
-		SONSTIGE_PATH + '/mission.mp3']
+		SONSTIGE_PATH + '/mission.mp3',
+                SONSTIGE_PATH + '/',
+                SONSTIGE_PATH + '/',
+		SONSTIGE_PATH + '/',
+                SONSTIGE_PATH + '/',
+                SONSTIGE_PATH + '/',
+		'Sonstige']
 
 	# Jingle Arrays
 	page = [nadine, andreas, ronny, sonstige]
@@ -143,65 +159,89 @@ def main():
 	pygame.mixer.music.play()
 
 	while running:
+		scrollphat.clear()
+		scrollphat.write_string(str(page[page_selected][8]))
 
 		if GPIO.input(5) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][0]))
+				scrollphat.clear()
+				scrollphat.write_string(page[page_selected][8])
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(11) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][1]))
+				scrollphat.clear()
+				scrollphat.write_string(page[page_selected][8])
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(8) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][2]))
+				scrollphat.clear()
+				scrollphat.write_String(page[page_selected][8])
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(25) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][3]))
+				scrollphat.write_string(page[page_selected][8])
+				scrollphat.clear()
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(9) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][4]))
+				scrollphat.write_string(page[page_selected][8])
+				scrollphat.clear()
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(10) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][5]))
+				scrollphat.write_string(page[page_selected][8])
+				scrollphat.clear()
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(20) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][6]))
+				scrollphat.write_string(page[page_selected][8])
+				scrollphat.clear()
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(6) == GPIO.LOW:
 			try:
 				(playJingle(page[page_selected][7]))
+				scrollphat.write_string(page[page_selected][8])
+				scrollphat.clear()
 				sleep(1)
 			except:
 				(jingleMissing())
 		if GPIO.input(27) == GPIO.LOW:
 			# page UP
 			page_selected = (pageUp(page_selected, len(page)))
+			scrollphat.clear()
+			scrollphat.write_string(page[page_selected][8])
 			sleep(1)
 		if GPIO.input(22) == GPIO.LOW:
 			# page DOWN
 			page_selected = (pageDown(page_selected, len(page)))
+			scrollphat.clear()
+			scrollphat.write_string(page[page_selected][8])
 			sleep(1)
 		if GPIO.input(23) == GPIO.LOW:
 			# All Random Fun Button
+			scrollphat.clear()
+                        scrollphat.write_string('Random!!')
 			(playRandom())
 			sleep(1)
 
